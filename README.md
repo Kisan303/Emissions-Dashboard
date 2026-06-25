@@ -26,6 +26,32 @@ This project provides interactive visualizations of GHG emissions data, enabling
 - State and county rankings
 - Population correlations
 
+## 📸 Dashboard Screenshots
+
+### Full Dashboard Overview
+![Emissions Dashboard Overview](images/dashboard-overview.png)
+*Complete view of the Emissions Dashboard with all visualizations*
+
+### Individual Visualizations
+
+#### 1. Geographic Emissions Map
+![Geographic Map](images/geographic-map.png)
+*Interactive map showing emissions distribution across US counties by latitude/longitude*
+
+#### 2. Emissions Per Person
+![Emissions Per Person](images/emissions-per-person.png)
+*Bar chart displaying per capita emissions by county*
+
+#### 3. Top 10 States by Total Emissions
+![Top States](images/top-states.png)
+*Bar chart ranking the top 10 states by total GHG emissions*
+
+#### 4. Top 10 Counties by Total Emissions
+![Top Counties](images/top-counties.png)
+*Bar chart identifying the highest-emitting counties*
+
+> **Note:** To view the live interactive dashboard, import the `dashboard/Emissions Dashboard.lvdash.json` file into your Databricks workspace.
+
 ## 📁 Repository Structure
 
 ```
