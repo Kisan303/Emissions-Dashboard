@@ -1,0 +1,81 @@
+{
+  "dashboard_name": "Emissions Dashboard",
+  "description": "GHG Emissions Analysis Dashboard - Analyzes greenhouse gas emissions data by location, state, county, and population",
+  "data_source": {
+    "catalog": "emissions",
+    "schema": "default",
+    "table": "emissions_data"
+  },
+  "datasets": [
+    {
+      "name": "Location Data",
+      "purpose": "Visualize emissions by geographic coordinates",
+      "query": "select \n    latitude,\n    longitude,\n    `GHG emissions mtons CO2e` as emissions\n\nfrom emissions.default.emissions_data",
+      "columns": [
+        "latitude",
+        "longitude",
+        "emissions"
+      ]
+    },
+    {
+      "name": "Emissions per Person",
+      "purpose": "Calculate per capita emissions by county",
+      "query": "select\n    county_state_name,\n    population,\n    cast(REPLACE(`GHG emissions mtons CO2e`, ',', '') as double) / NULLIF(cast(population as double), 0) as EmissionsPerPerson\nfrom emissions.default.emissions_data\norder by emissionsperperson desc\n",
+      "columns": [
+        "county_state_name",
+        "population",
+        "EmissionsPerPerson"
+      ],
+      "notes": "Handles comma-separated numbers and division by zero"
+    },
+    {
+      "name": "Emissions Per State",
+      "purpose": "Aggregate total emissions by state (top 10)",
+      "query": "select\n  state_abbr,\n  SUM(cast(REPLACE(`GHG emissions mtons CO2e`, ',', '') as double)) as TotalEmissionByState\nfrom\n  emissions.default.emissions_data\ngroup by\n  state_abbr\norder by\n  TotalEmissionByState desc\n  limit 10\n",
+      "columns": [
+        "state_abbr",
+        "TotalEmissionByState"
+      ],
+      "notes": "Top 10 states by total emissions"
+    },
+    {
+      "name": "County Shaming",
+      "purpose": "Identify counties with highest total emissions (top 10)",
+      "query": "select county_state_name,\n        population,\n        cast(\n            replace(`GHG emissions mtons CO2e`, ',', '') as double\n        ) as Total_Emissions\n        from emissions.default.emissions_data\n\norder by Total_Emissions desc\nlimit 10",
+      "columns": [
+        "county_state_name",
+        "population",
+        "Total_Emissions"
+      ],
+      "notes": "Top 10 counties by total emissions"
+    }
+  ],
+  "visualizations": [
+    {
+      "type": "Geographic Map",
+      "dataset": "Location Data",
+      "description": "Point map showing emissions by latitude/longitude"
+    },
+    {
+      "type": "Bar Chart",
+      "dataset": "Emissions per Person",
+      "description": "Per capita emissions comparison across counties"
+    },
+    {
+      "type": "Bar Chart",
+      "dataset": "Emissions Per State",
+      "description": "Top 10 states by total emissions"
+    },
+    {
+      "type": "Bar Chart",
+      "dataset": "County Shaming",
+      "description": "Top 10 counties by total emissions"
+    }
+  ],
+  "metadata": {
+    "created_date": "2026-06-25",
+    "databricks_workspace": "https://dbc-ce5c7ebc-9595.cloud.databricks.com",
+    "workspace_id": "7474644337336290",
+    "dashboard_id": "01f170cf76af10b2be836edb371de2e6"
+  }
+}
