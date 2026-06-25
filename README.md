@@ -36,14 +36,17 @@ This project provides interactive visualizations of GHG emissions data, enabling
 
 #### 1. Geographic Emissions Map
 ![Geographic Map](images/geographic-map.png)
+
 *Interactive map showing emissions distribution across US counties by latitude/longitude*
 
 #### 2. Emissions Per Person
 ![Emissions Per Person](images/emissions-per-person.png)
+
 *Bar chart displaying per capita emissions by county*
 
 #### 3. Top 10 States by Total Emissions
 ![Top States](images/top-states.png)
+
 *Bar chart ranking the top 10 states by total GHG emissions*
 
 #### 4. Top 10 Counties by Total Emissions
